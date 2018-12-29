@@ -3,5 +3,21 @@ analytics.load("nFqY17h73qowNoVOZmkZpADOvb4JgVvG");
 }}();
 
 document.addEventListener("turbolinks:load", function(){
+  var meta_tag = document.querySelector("meta[name='current-user']")
+  var button = document.getElementById("hello")
+
+  button.addEventListener("click", function(){
+    analytics.track("Hello Button clicked")
+  })
+
+  if (meta_tag != null) {
+    analytics.identify(
+      meta_tag.content,
+      {
+        name: meta_tag.dataset.name,
+        email: meta_tag.dataset.email,
+      }
+    );
+  }
   analytics.page();
 })
